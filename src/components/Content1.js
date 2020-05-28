@@ -22,6 +22,17 @@ class Content1 extends Component {
             ]
         };
     }
+    componentDidMount(){
+        fetch('https://plants-backend.now.sh/plants')
+        .then((respuesta) => {
+            return respuesta.json();
+        }).then((plantas) => {
+            console.log(plantas);
+            this.setState({
+                plants: plantas
+            })
+        }) 
+    }
     render() {
         let {plants} = this.state;
         return (
@@ -40,11 +51,11 @@ class Content1 extends Component {
                         <tbody>
                             {plants.map((plant, id) => {
                                 return (<tr key = {id}>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{plant.id}</td>
+                                    <td>{plant.common_name}</td>
+                                    <td>{plant.family_name}</td>
+                                    <td>{plant.scientific_name}</td>
+                                    <td>{plant.cost}</td>
                                 </tr>);
                             })}
                         </tbody>
